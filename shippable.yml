@@ -8,7 +8,7 @@ resources:
       branch: master
 
 # cliConfig for configuring gcloud cli
-  - name: gcp_gce_cli
+  - name: gcp_gcloud_cli
     type: cliConfig
     integration: "drship_gcp"
 
@@ -17,7 +17,7 @@ jobs:
   - name: install_gce_nexus
     type: runSh
     steps:
-      - IN: gcp_gce_cli
+      - IN: gcp_gcloud_cli
       - IN: install_gce_nexus_repo
         switch: off
       - IN: gcp_gce_info
