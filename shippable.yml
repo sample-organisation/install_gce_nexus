@@ -14,7 +14,7 @@ resources:
 
 jobs:
 # Install nexus on gce
-  - name: install_
+  - name: install_gce_nexus
     type: runSh
     steps:
       - IN: gcp_gce_cli
