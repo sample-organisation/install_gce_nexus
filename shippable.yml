@@ -12,6 +12,12 @@ resources:
     type: cliConfig
     integration: "drship_gcp"
 
+  - name: gcp_nexus_info
+    type: params
+    versionTemplate:
+      params:
+        SEED: "initial_version"
+
 jobs:
 # Install nexus on gce
   - name: install_gce_nexus
@@ -29,7 +35,10 @@ jobs:
             - gcloud compute scp ./install_nexus.sh dev:~/install_nexus.sh --zone us-east1-d
             - gcloud compute ssh $gce_name --zone $gce_zone --command="chmod +x ~/install_nexus.sh"
             - gcloud compute ssh $gce_name --zone $gce_zone --command="~/install_nexus.sh"
+            - shipctl put_resource_state_multi "$STATE_RES_NAME" "NEXUS_HOST=$INST_0_PUBLIC_IP"
             - popd
+      - OUT: gcp_nexus_info
+        overwrite: true
     flags:
       - gce_nexus
       - gce
