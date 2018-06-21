@@ -30,6 +30,10 @@ jobs:
         switch: off
       - TASK:
           name: install_nexus
+          runtime:
+            options:
+              env:
+                - STATE_RES_NAME: "gcp_nexus_info"
           script:
             - pushd $(shipctl get_resource_state "install_gce_nexus_repo")
             - gcloud compute scp ./install_nexus.sh dev:~/install_nexus.sh --zone us-east1-d
